@@ -3,7 +3,7 @@ from datetime import datetime
 import os
 import subprocess
 import webbrowser
-import time
+
 
 
 
@@ -32,7 +32,9 @@ def clock():
 bg = PhotoImage(file='design.png')
 
 label_bg = Label(root,image=bg)
-label_bg.place(x=0,y=0,relwidth=1,relheight=1)
+label_bg.place(x=0,y=0,relwidth=1,relheight=1) 
+
+
 
 
 
