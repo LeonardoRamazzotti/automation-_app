@@ -1,3 +1,6 @@
+
+# MODULE SECTION -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 from tkinter import *
 from datetime import datetime
 from openpyxl import load_workbook
@@ -8,9 +11,9 @@ import pandas as pd
 import pathlib
 import pyperclip
 
-loc = (r'automation_groups.xlsx')
+#Funciton Section-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-def Button_1(excel_path):
+def Button_1(excel_path):   #Work icon function
     
     df = pd.read_excel(excel_path,sheet_name='Button1')
 
@@ -24,7 +27,7 @@ def Button_1(excel_path):
 
 
 
-def Button_2(excel_path):
+def Button_2(excel_path):   #Study icon function
     
     df = pd.read_excel(excel_path,sheet_name='Button2')
 
@@ -36,7 +39,7 @@ def Button_2(excel_path):
         else:
             subprocess.Popen(element)
 
-def Button_3(excel_path):
+def Button_3(excel_path):  #Code Icon function
     
     df = pd.read_excel(excel_path,sheet_name='Button3')
 
@@ -50,7 +53,7 @@ def Button_3(excel_path):
 
 
 
-def Button_4(excel_path):
+def Button_4(excel_path):  # Streaming icon function
     
     df = pd.read_excel(excel_path,sheet_name='Button4')
 
@@ -62,24 +65,7 @@ def Button_4(excel_path):
         else:
             subprocess.Popen(element)
 
-
-
-#GUI section
-
-if os.name == "posix":
-    fonts = ("Courier", 16)
-    border='white'    
-else:
-    fonts = ("Courier", 12)
-    border='black'
-
-
-root = Tk()
-root.title('Shortcut')
-root.geometry('428x926')
-root.resizable(False, False)
-
-def clock():
+def clock():   #Clock function
     now = datetime.now()
 
     current_time = now.strftime("%H:%M")
@@ -89,7 +75,7 @@ def clock():
     label_time.after(1000,clock)
 
 
-def daytime():
+def daytime():  # Daydate function
 
     now = datetime.now()
     currentday = now.strftime('%d/%m/%Y')
@@ -99,15 +85,12 @@ def daytime():
     label_day.after(10000,clock)
 
 
-def Copy_path(file):
+def Copy_path(file): #copy the label path on settings
 
     pyperclip.copy(file)
     
-def Open_readme():
 
-    open('README.txt','a')
-
-def Settings():
+def Settings():  # Setting Windows 
     setting_window = Toplevel(root)
 
     setting_window.title('Settings')
@@ -134,11 +117,26 @@ def Settings():
     Label_info = Label(setting_window,text='Copyright Leonardo Ramazzotti 2021',font = ('ABeeZee',12),bg='#333B41', fg= 'white')
     Label_info.place(x=15,y=550)
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 
+#GUI section -END----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+if os.name == "posix":
+    fonts = ("Courier", 16)
+    border='white'    
+else:
+    fonts = ("Courier", 12)
+    border='black'
 
+#Window Settings-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+root = Tk()
+root.title('Shortcut')
+root.geometry('428x926')
+root.resizable(False, False)
+
+#Image Section ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 bg = PhotoImage(file='design.png')
 b1 = PhotoImage(file='study_icon.png')
@@ -147,14 +145,17 @@ b3 = PhotoImage(file='streaming_icon.png')
 b4 = PhotoImage(file= 'code_icon.png')
 bsettings = PhotoImage(file='settings_icon.png')
 
+#Background Settings----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 label_bg = Label(root,image=bg)
 label_bg.place(x=0,y=0,relwidth=1,relheight=1) 
 
-
+#Calling Date and time Function ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 clock()
 daytime()
 
+# Button Groups Section ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Button_study = Button(image=b1,bg='#333B41',command= lambda: Button_2(loc),borderwidth=0)
 Button_study.place(x=55,y=650)
@@ -172,6 +173,6 @@ Button_code.place(x=275,y=448)
 Button_settings = Button(root,image = bsettings,bg='#202329',command= Settings ,borderwidth=0)
 Button_settings.place(x=350,y=20)
 
-
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 root.mainloop()
