@@ -5,6 +5,9 @@ from tkinter import *
 from datetime import datetime
 from openpyxl import load_workbook
 from subprocess import call
+import webbrowser
+from bs4 import BeautifulSoup
+import requests
 import os
 import subprocess
 import webbrowser
@@ -92,6 +95,54 @@ def Copy_path(file): #copy the label path on settings
 
 
 
+def weather(link,head):   # funzione che fa web scraping e cerca meteo nella posizione corrente
+
+    page = requests.get(link, headers=head)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    
+
+    
+
+    condizione = str(soup.find(id='wob_dc').get_text())
+    
+   # temp = soup.find(id='wob_ttm')
+    
+    
+    if condizione == 'Soleggiato':
+        weather_img =weather_sunny
+    
+    
+    elif condizione == 'Parzialmente nuvoloso':
+        weather_img =weather_par_cloudy
+    
+
+    elif condizione == 'Temporale':
+        weather_img =weather_temp
+
+
+
+    elif condizione == 'Rovesci':
+        weather_img =weather_rainy
+    
+    
+    elif condizione == 'Pioggia':
+        weather_img =weather_rainy
+    
+    
+    elif condizione == 'Rovesci nevosi':
+        weather_img =weather_snowing
+    
+    
+    elif condizione == 'Grandine':
+        weather_img =weather_hailstorm
+    
+    
+    Label_Weather = Label(root, image = weather_img,bg='#333B41')
+    Label_Weather.place(x=200,y=285)    
+
+
+
 def VolumeUp(): #Volume Control UP
     
 
@@ -163,6 +214,18 @@ b3 = PhotoImage(file='streaming_icon.png')
 b4 = PhotoImage(file= 'code_icon.png')
 bsettings = PhotoImage(file='settings_icon.png')
 
+volumeup = PhotoImage(file='volumeup.png')
+volumedown = PhotoImage(file='volumedown.png')
+mute = PhotoImage(file='mute.png')
+
+weather_sunny = PhotoImage(file='sunny.png')
+weather_cloudy = PhotoImage(file='cover.png')
+weather_rainy = PhotoImage(file='rain.png')
+weather_temp = PhotoImage(file='temporal.png')
+weather_hailstorm = PhotoImage(file='hailstorm.png')
+weather_snowing = PhotoImage(file='snow.png')
+weather_par_cloudy = PhotoImage(file='par_cloudy.png')
+
 #Background Settings----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 label_bg = Label(root,image=bg)
@@ -203,6 +266,28 @@ Button_code.place(x=275,y=445)
 Button_settings = Button(root,image = bsettings,bg='#202329',command= Settings ,highlightthickness = 0,borderwidth=0)
 Button_settings.place(x=350,y=20)
 
+
+volumeupButton = Button(root,image=volumeup,bg='#202329',command= VolumeUp ,highlightthickness = 0,borderwidth=0)
+volumeupButton.place(x=25,y=835) 
+
+volumedownButton = Button(root,image=volumedown,bg='#202329',command= VolumeDown ,highlightthickness = 0,borderwidth=0)
+volumedownButton.place(x=75,y=835) 
+
+volumemuteButton = Button(root,image=mute,bg='#202329',command= Mute ,highlightthickness = 0,borderwidth=0)
+volumemuteButton.place(x=125,y=835)
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Section Weather Web Scraping
+
+
+headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36' }
+
+
+URL = 'https://www.google.com/search?q=weather+location&oq=weather+location&aqs=chrome..69i57.3274j0j7&sourceid=chrome&ie=UTF-8'
+
+weather(URL,headers)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 root.mainloop()
