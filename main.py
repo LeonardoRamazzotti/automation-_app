@@ -4,6 +4,7 @@
 from tkinter import *
 from datetime import datetime
 from openpyxl import load_workbook
+from subprocess import call
 import os
 import subprocess
 import webbrowser
@@ -15,7 +16,7 @@ import pyperclip
 
 def Button_1(excel_path):   #Work icon function
     
-    df = pd.read_excel(excel_path,sheet_name='Button1')
+    df = pd.read_excel(excel_path,sheet_name='Work')
 
     xl_key = list(df['actions'])
 
@@ -29,7 +30,7 @@ def Button_1(excel_path):   #Work icon function
 
 def Button_2(excel_path):   #Study icon function
     
-    df = pd.read_excel(excel_path,sheet_name='Button2')
+    df = pd.read_excel(excel_path,sheet_name='Study')
 
     xl_key = list(df['actions'])
 
@@ -41,7 +42,7 @@ def Button_2(excel_path):   #Study icon function
 
 def Button_3(excel_path):  #Code Icon function
     
-    df = pd.read_excel(excel_path,sheet_name='Button3')
+    df = pd.read_excel(excel_path,sheet_name='Code')
 
     xl_key = list(df['actions'])
 
@@ -55,7 +56,7 @@ def Button_3(excel_path):  #Code Icon function
 
 def Button_4(excel_path):  # Streaming icon function
     
-    df = pd.read_excel(excel_path,sheet_name='Button4')
+    df = pd.read_excel(excel_path,sheet_name='Streaming')
 
     xl_key = list(df['actions'])
 
@@ -82,12 +83,29 @@ def daytime():  # Daydate function
 
     label_day = Label(root,text=currentday, font = ('ABeeZee',20),bg='#202329', fg= '#757778')
     label_day.place(x=42,y=22)
-    label_day.after(10000,clock)
+    label_day.after(10000,daytime)
 
 
 def Copy_path(file): #copy the label path on settings
 
     pyperclip.copy(file)
+
+
+
+def VolumeUp(): #Volume Control UP
+    
+
+    call(["amixer","-D","pulse","sset","Master","10%+"])
+    
+def VolumeDown(): #Volume Control Down
+    
+     call(["amixer","-D","pulse","sset","Master","10%-"])
+     
+ 
+     
+def Mute():  #Volume Control Mute
+    
+     call(["amixer","-D","pulse","sset","Master","100%-"])
     
 
 def Settings():  # Setting Windows 
@@ -132,7 +150,7 @@ else:
 #Window Settings-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 root = Tk()
-root.title('Shortcut')
+root.title('Control Center')
 root.geometry('428x926')
 root.resizable(False, False)
 
@@ -157,20 +175,32 @@ daytime()
 
 # Button Groups Section ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Button_study = Button(image=b1,bg='#333B41',command= lambda: Button_2(loc),borderwidth=0)
+Label_study=Label(root,text='Study',font = ('ABeeZee',16),bg='#333B41', fg= '#757778')
+Label_study.place(x=55,y=600)
+
+Button_study = Button(image=b1,bg='#333B41',command= lambda: Button_2(loc),highlightthickness = 0,borderwidth=0)
 Button_study.place(x=55,y=650)
 
-Button_streaming = Button(image=b3,bg='#333B41',command= lambda: Button_4(loc),borderwidth=0)
+Label_streaming=Label(root,text='Streaming',font = ('ABeeZee',16),bg='#333B41', fg= '#757778')
+Label_streaming.place(x=275,y=600)
+
+Button_streaming = Button(image=b3,bg='#333B41',command= lambda: Button_4(loc),highlightthickness = 0,borderwidth=0)
 Button_streaming.place(x=275,y=650)
 
-Button_work = Button(image=b2,bg='#333B41',command= lambda: Button_1(loc),borderwidth=0) 
+Label_work=Label(root,text='Work',font = ('ABeeZee',16),bg='#333B41', fg= '#757778')
+Label_work.place(x=55,y=400)
+
+Button_work = Button(image=b2,bg='#333B41',command= lambda: Button_1(loc),highlightthickness = 0,borderwidth=0) 
 Button_work.place(x=55,y=450)
 
-Button_code = Button(image=b4,bg='#333B41',command= lambda: Button_4(loc),borderwidth=0)
-Button_code.place(x=275,y=448)
+Label_code=Label(root,text='Code',font = ('ABeeZee',16),bg='#333B41', fg= '#757778')
+Label_code.place(x=275,y=400)
+
+Button_code = Button(image=b4,bg='#333B41',command= lambda: Button_4(loc),highlightthickness = 0,borderwidth=0)
+Button_code.place(x=275,y=445)
 
 
-Button_settings = Button(root,image = bsettings,bg='#202329',command= Settings ,borderwidth=0)
+Button_settings = Button(root,image = bsettings,bg='#202329',command= Settings ,highlightthickness = 0,borderwidth=0)
 Button_settings.place(x=350,y=20)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
