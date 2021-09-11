@@ -139,7 +139,7 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     
     
     Label_Weather = Label(root, image = weather_img,bg='#333B41')
-    Label_Weather.place(x=200,y=285)    
+    Label_Weather.place(x=187,y=285)    
 
 
 
