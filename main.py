@@ -100,24 +100,18 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     page = requests.get(link, headers=head)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    
-
-    
-
     condizione = str(soup.find(id='wob_dc').get_text())
     Luogo = str(soup.find(id='wob_loc').get_text())
-    
-    temp = str(soup.find(id='wob_dc'))
 
-    wind_speed = str(soup.find(id='wob_ws'))  # da rivedere wind speed , temp and rainfall percentage
-    rainfall = str(soup.find(id='wob_pp'))
+    wind_speed = str(soup.find(id='wob_ws').get_text()) # da rivedere wind speed , temp and rainfall percentage
+    rainfall = str(soup.find(id='wob_pp').get_text())
     
     
     if condizione == 'Soleggiato' or condizione == 'Sereno':
         weather_img =weather_sunny
     
     
-    elif condizione == 'Parzialmente nuvoloso':
+    elif condizione == 'Parzialmente nuvoloso'or condizione == 'Per lo più soleggiato':
         weather_img =weather_par_cloudy
     
 
@@ -140,13 +134,20 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     
     
     Label_Weather = Label(root, image = weather_img,bg='#333B41')
-    Label_Weather.place(x=80,y=285)    
+    Label_Weather.place(x=20,y=285)    
 
     Label_luogo = Label(root, text=Luogo,font = ('ABeeZee',18),bg='#333B41', fg= '#757778' )
-    Label_luogo.place(x=180,y=290)
+    Label_luogo.place(x=220,y=290)
 
-    #Label_wind = Label(root,text=wind_speed,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
-   # Label_wind.place(x=180,y=300)
+    Label_wind = Label(root,text='Wind:'+wind_speed,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
+    Label_wind.place(x=100,y=295)
+    
+    Label_rainfall = Label(root,text='Raifall:'+rainfall,font = ('ABeeZee',12),bg='#333B41', fg= '#757778')
+    Label_rainfall.place(x=100,y=315)
+
+
+    Label_cond =Label(root, text=condizione,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
+    Label_cond.place(x=220,y=320)
 
     
 
