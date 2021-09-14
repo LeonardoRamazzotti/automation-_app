@@ -126,12 +126,9 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
 
 
 
-    elif condizione == 'Rovesci':
+    elif condizione == 'Rovesci' or condizione == 'Pioggia':
         weather_img =weather_rainy
     
-    
-    elif condizione == 'Pioggia':
-        weather_img =weather_rainy
     
     
     elif condizione == 'Rovesci nevosi':
