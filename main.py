@@ -154,7 +154,8 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
 
 
     Label_cond =Label(root, text=condizione,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
-    Label_cond.place(x=220,y=320)
+    Label_cond.place(x=220,y=318)
+
 
     
 
