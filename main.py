@@ -105,6 +105,10 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
 
     wind_speed = str(soup.find(id='wob_ws').get_text()) # da rivedere wind speed , temp and rainfall percentage
     rainfall = str(soup.find(id='wob_pp').get_text())
+
+    temp = str(soup.find(id='wob_tm').get_text())
+
+    
     
     
     if condizione == 'Soleggiato' or condizione == 'Sereno':
@@ -144,6 +148,9 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     
     Label_rainfall = Label(root,text='Raifall:'+rainfall,font = ('ABeeZee',12),bg='#333B41', fg= '#757778')
     Label_rainfall.place(x=100,y=315)
+
+    Label_temp = Label(root,text=temp+'°C',font = ('ABeeZee',28),bg='#202329', fg= '#757778')
+    Label_temp.place(x=220,y=14)
 
 
     Label_cond =Label(root, text=condizione,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
