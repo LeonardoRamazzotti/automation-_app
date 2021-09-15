@@ -180,12 +180,9 @@ def Mute():  #Volume Control Mute
      
 def Searchbar():
     
-    search_word =str(Entry_search.get_text())
+    search_word =str(Enter_search.get())
     
     webbrowser.open('https://www.google.com/search?q='+ search_word)
-    
-    Entry_search = Entry(root, text='',font = ('ABeeZee',16),bg='#202329', fg= 'white')
-    Entry_search.place(x=115,y=838)
     
     
 
@@ -245,6 +242,8 @@ b2 = PhotoImage(file='work_icon.png')
 b3 = PhotoImage(file='streaming_icon.png')
 b4 = PhotoImage(file= 'code_icon.png')
 bsettings = PhotoImage(file='settings_icon.png')
+b_google = PhotoImage(file='google.png')
+
 
 volumeup = PhotoImage(file='volumeup.png')
 volumedown = PhotoImage(file='volumedown.png')
@@ -325,17 +324,27 @@ weather(URL,headers)
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Section Searchbar
 
-if platform.system() == 'Windows' :
+if os.name == 'nt':
     
     Label_search = Label(root, text='Google:',font = ('ABeeZee',16),bg='#202329', fg= '#757778')
     Label_search.place(x=25,y=835)
+
+    Enter_search = Entry(root,font = ('ABeeZee',12),bg='#202329', fg= 'white', width = 15)
+    Enter_search.place(x=115,y=838)
     
-    Entry_search = Entry(root,font = ('ABeeZee',12),bg='#202329', fg= 'white', width = 20)
-    Entry_search.place(x=115,y=838)
-    
-    Button_search = Button(root,text='search',font = ('ABeeZee',12),bg='#202329', fg= 'white',command = lambda: Searchbar())
+    Button_search = Button(root,image = b_google,bg='#202329',command = lambda: Searchbar(),highlightthickness = 0,borderwidth=0)
     Button_search.place(x=300, y=838)
 
+else:
+
+    Label_search = Label(root, text='Google:',font = ('ABeeZee',12),bg='#202329', fg= '#757778')
+    Label_search.place(x=170,y=825)
+
+    Enter_search = Entry(root,font = ('ABeeZee',12),bg='#202329', fg= 'white', width = 18)
+    Enter_search.place(x=170,y=855)
+    
+    Button_search = Button(root,image = b_google,bg='#202329',command = lambda: Searchbar(),highlightthickness = 0,borderwidth=0)
+    Button_search.place(x=345, y=851)
 
 
 
