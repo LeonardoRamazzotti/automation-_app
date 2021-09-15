@@ -327,14 +327,16 @@ weather(URL,headers)
 if os.name == 'nt':
     
     Label_search = Label(root, text='Google:',font = ('ABeeZee',16),bg='#202329', fg= '#757778')
-    Label_search.place(x=25,y=835)
+    Label_search.place(x=25,y=841)
 
-    Enter_search = Entry(root,font = ('ABeeZee',12),bg='#202329', fg= 'white', width = 15)
-    Enter_search.place(x=115,y=838)
+    Enter_search = Entry(root,font = ('ABeeZee',12),bg='#202329', fg= 'white', width = 18)
+    Enter_search.place(x=115,y=841)
     
     Button_search = Button(root,image = b_google,bg='#202329',command = lambda: Searchbar(),highlightthickness = 0,borderwidth=0)
     Button_search.place(x=300, y=838)
 
+   
+        
 else:
 
     Label_search = Label(root, text='Google:',font = ('ABeeZee',12),bg='#202329', fg= '#757778')
