@@ -14,6 +14,8 @@ import webbrowser
 import pandas as pd
 import pathlib
 import pyperclip
+from tkinter import PhotoImage
+import keyboard
 
 #Funciton Section-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -150,7 +152,7 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     Label_rainfall.place(x=100,y=315)
 
     Label_temp = Label(root,text=temp+'°C',font = ('ABeeZee',28),bg='#202329', fg= '#757778')
-    Label_temp.place(x=220,y=14)
+    Label_temp.place(x=220,y=19)
 
 
     Label_cond =Label(root, text=condizione,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
@@ -173,6 +175,20 @@ def VolumeDown(): #Volume Control Down
 def Mute():  #Volume Control Mute
     
      call(["amixer","-D","pulse","sset","Master","100%-"])
+     
+     
+     
+def Searchbar():
+    
+    search_word =str(Entry_search.get_text())
+    
+    webbrowser.open('https://www.google.com/search?q='+ search_word)
+    
+    Entry_search = Entry(root, text='',font = ('ABeeZee',16),bg='#202329', fg= 'white')
+    Entry_search.place(x=115,y=838)
+    
+    
+
     
 
 def Settings():  # Setting Windows 
@@ -283,14 +299,18 @@ Button_settings = Button(root,image = bsettings,bg='#202329',command= Settings ,
 Button_settings.place(x=350,y=20)
 
 
-volumeupButton = Button(root,image=volumeup,bg='#202329',command= VolumeUp ,highlightthickness = 0,borderwidth=0)
-volumeupButton.place(x=25,y=835) 
+if os.name == "posix":
+  
+    volumeupButton = Button(root,image=volumeup,bg='#202329',command= VolumeUp ,highlightthickness = 0,borderwidth=0)
+    volumeupButton.place(x=25,y=835) 
 
-volumedownButton = Button(root,image=volumedown,bg='#202329',command= VolumeDown ,highlightthickness = 0,borderwidth=0)
-volumedownButton.place(x=75,y=835) 
+    volumedownButton = Button(root,image=volumedown,bg='#202329',command= VolumeDown ,highlightthickness = 0,borderwidth=0)
+    volumedownButton.place(x=75,y=835) 
 
-volumemuteButton = Button(root,image=mute,bg='#202329',command= Mute ,highlightthickness = 0,borderwidth=0)
-volumemuteButton.place(x=125,y=835)
+    volumemuteButton = Button(root,image=mute,bg='#202329',command= Mute ,highlightthickness = 0,borderwidth=0)
+    volumemuteButton.place(x=125,y=835)
+    
+    
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Section Weather Web Scraping
 
@@ -301,6 +321,23 @@ headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 URL = 'https://www.google.com/search?q=weather+location&oq=weather+location&aqs=chrome..69i57.3274j0j7&sourceid=chrome&ie=UTF-8'
 
 weather(URL,headers)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Section Searchbar
+
+if platform.system() == 'Windows' :
+    
+    Label_search = Label(root, text='Google:',font = ('ABeeZee',16),bg='#202329', fg= '#757778')
+    Label_search.place(x=25,y=835)
+    
+    Entry_search = Entry(root,font = ('ABeeZee',12),bg='#202329', fg= 'white', width = 20)
+    Entry_search.place(x=115,y=838)
+    
+    Button_search = Button(root,text='search',font = ('ABeeZee',12),bg='#202329', fg= 'white',command = lambda: Searchbar())
+    Button_search.place(x=300, y=838)
+
+
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
