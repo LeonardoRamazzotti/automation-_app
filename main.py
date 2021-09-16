@@ -137,7 +137,9 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     
     elif condizione == 'Grandine':
         weather_img =weather_hailstorm
-    
+
+    elif condizione == 'Per lo più nuvoloso':
+        weather_img = weather_cloudy
     
     Label_Weather = Label(root, image = weather_img,bg='#333B41')
     Label_Weather.place(x=20,y=285)    
@@ -149,14 +151,14 @@ def weather(link,head):   # funzione che fa web scraping e cerca meteo nella pos
     Label_wind.place(x=100,y=295)
     
     Label_rainfall = Label(root,text='Raifall:'+rainfall,font = ('ABeeZee',12),bg='#333B41', fg= '#757778')
-    Label_rainfall.place(x=100,y=315)
+    Label_rainfall.place(x=100,y=318)
 
     Label_temp = Label(root,text=temp+'°C',font = ('ABeeZee',28),bg='#202329', fg= '#757778')
     Label_temp.place(x=220,y=19)
 
 
     Label_cond =Label(root, text=condizione,font = ('ABeeZee',12),bg='#333B41', fg= '#757778' )
-    Label_cond.place(x=220,y=318)
+    Label_cond.place(x=220,y=322)
 
 
     
@@ -215,6 +217,11 @@ def Settings():  # Setting Windows
     Label_info = Label(setting_window,text='Copyright Leonardo Ramazzotti 2021',font = ('ABeeZee',12),bg='#333B41', fg= 'white')
     Label_info.place(x=15,y=550)
 
+
+
+def quit_win(event):
+    root.destroy()
+    quit()
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 
@@ -233,7 +240,7 @@ root = Tk()
 root.title('Control Center')
 root.geometry('428x926')
 root.resizable(False, False)
-
+#root.overrideredirect(True)
 #Image Section ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 bg = PhotoImage(file='design.png')
@@ -348,7 +355,12 @@ else:
     Button_search = Button(root,image = b_google,bg='#202329',command = lambda: Searchbar(),highlightthickness = 0,borderwidth=0)
     Button_search.place(x=345, y=851)
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Bind Section
 
+
+root.bind('<Enter>',Searchbar)
+root.bind('<F12>',quit_win)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
