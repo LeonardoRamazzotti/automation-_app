@@ -180,7 +180,7 @@ def Mute():  #Volume Control Mute
      
      
      
-def Searchbar():
+def Searchbar(event):
     
     search_word =str(Enter_search.get())
     
@@ -359,7 +359,7 @@ else:
 #Bind Section
 
 
-root.bind('<Enter>',Searchbar)
+
 root.bind('<F12>',quit_win)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
